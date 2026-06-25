@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instituto Gastronómico Rebecca's Cuisine</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --azul:#a8d4e6;
+  --azul-dark:#5fa8c8;
+  --azul-deeper:#2e7da0;
+  --azul-light:#e8f4fa;
+  --azul-xlight:#f3f9fc;
+  --crema:#fdf8f3;
+  --dorado:#c9954a;
+  --dorado-light:#e8c580;
+  --texto:#1a2a35;
+  --texto-suave:#4a6275;
+  --blanco:#ffffff;
+  --font-display:'Playfair Display',serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);color:var(--texto);background:var(--crema);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;transition:all .4s ease;background:transparent}
+nav.scrolled{background:rgba(255,255,255,0.96);backdrop-filter:blur(12px);box-shadow:0 1px 20px rgba(0,0,0,0.08)}
+.nav-logo img{height:52px;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.3))}
+nav.scrolled .nav-logo img{filter:none}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:.85rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.9);transition:color .3s}
+nav.scrolled .nav-links a{color:var(--texto-suave)}
+.nav-links a:hover{color:var(--dorado)}
+nav.scrolled .nav-links a:hover{color:var(--azul-deeper)}
+.nav-cta{background:var(--dorado);color:#fff !important;padding:.5rem 1.2rem;border-radius:2rem;font-weight:500 !important}
+nav.scrolled .nav-cta{background:var(--azul-deeper);color:#fff !important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
+.nav-hamburger span{width:22px;height:2px;background:#fff;transition:all .3s;display:block}
+nav.scrolled .nav-hamburger span{background:var(--texto)}
+
+/* HERO */
+.hero{position:relative;width:100%;height:calc(82vh - 192px);min-height:408px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,22,40,0.5) 0%,rgba(0,18,35,0.26) 42%,rgba(0,22,40,0.55) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:1.5rem;max-width:760px}
+.hero-badge{display:inline-block;background:rgba(168,212,230,0.25);border:1px solid rgba(168,212,230,0.5);color:#d4edf7;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;padding:.4rem 1.2rem;border-radius:2rem;margin-bottom:1.5rem;backdrop-filter:blur(4px)}
+.hero h1{font-family:var(--font-display);font-size:clamp(2.8rem,7vw,5.5rem);color:#fff;line-height:1.1;margin-bottom:1rem;text-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.hero h1 em{color:var(--dorado-light);font-style:italic}
+.hero p{font-size:clamp(1rem,2vw,1.2rem);color:rgba(255,255,255,0.85);max-width:500px;margin:0 auto 2rem;line-height:1.6}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--dorado);color:#fff;padding:.85rem 2.2rem;border-radius:3rem;font-weight:500;text-decoration:none;font-size:.95rem;letter-spacing:.04em;transition:all .3s;border:none;cursor:pointer}
+.btn-primary:hover{background:#b8843a;transform:translateY(-2px)}
+.btn-outline{border:1.5px solid rgba(255,255,255,0.7);color:#fff;padding:.85rem 2.2rem;border-radius:3rem;font-weight:500;text-decoration:none;font-size:.95rem;letter-spacing:.04em;transition:all .3s}
+.btn-outline:hover{background:rgba(255,255,255,0.12)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;color:rgba(255,255,255,0.6);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;animation:bounce 2s infinite}
+.hero-scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,0.6),transparent)}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+@media(max-height:660px){.hero-scroll{display:none}}
+
+/* LINE ICONS */
+.ic{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.curso-icon svg{width:22px;height:22px;stroke:#fff}
+.cert-card-icon svg{width:26px;height:26px;stroke:var(--dorado-light)}
+.dato-icon svg{width:20px;height:20px;stroke:var(--azul-deeper)}
+.red-btn svg{width:18px;height:18px;stroke:currentColor}
+.badge-icon svg{width:12px;height:12px;stroke:#fff;stroke-width:2.5}
+.tv-card h3 svg{width:22px;height:22px;stroke:var(--dorado-light);vertical-align:-4px;margin-right:.45rem}
+
+/* POSTER GALLERY */
+.poster-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.poster-grid figure{position:relative;aspect-ratio:3/4;border-radius:1rem;overflow:hidden;box-shadow:0 12px 36px rgba(0,0,0,.14);background:#0a1a25}
+.poster-grid img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.poster-grid figure:hover img{transform:scale(1.05)}
+@media(prefers-reduced-motion:reduce){.hero-scroll,.blink-title{animation:none}.poster-grid figure:hover img{transform:none}}
+
+/* SECTIONS GENERAL */
+section{padding:5rem 1.5rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--azul-deeper);font-weight:500;margin-bottom:.8rem}
+.section-title{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);line-height:1.15;color:var(--texto);margin-bottom:1.5rem}
+.section-title em{font-style:italic;color:var(--azul-deeper)}
+.divider{width:60px;height:3px;background:var(--dorado);border-radius:2px;margin-bottom:2rem}
+
+/* INSTITUTO */
+#instituto{background:var(--blanco)}
+.instituto-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+.instituto-text p{font-size:1.05rem;color:var(--texto-suave);line-height:1.8;margin-bottom:1.2rem}
+.instituto-badges{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+.badge{display:flex;align-items:center;gap:.5rem;background:var(--azul-xlight);border:1px solid var(--azul);color:var(--azul-deeper);font-size:.8rem;font-weight:500;padding:.5rem 1rem;border-radius:2rem}
+.badge-icon{width:20px;height:20px;background:var(--azul-deeper);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:.65rem;font-weight:700}
+.instituto-visual{position:relative}
+.instituto-img-wrap{aspect-ratio:4/3;border-radius:1.5rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.12);position:relative}
+.instituto-img-wrap img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;opacity:0;transition:opacity 1s ease}
+.instituto-img-wrap img.active{opacity:1}
+.slide-label{display:none}
+.slide-dots{position:absolute;bottom:1rem;right:1rem;display:flex;gap:.4rem;z-index:2}
+.slide-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.4);transition:background .3s,transform .3s;cursor:pointer}
+.slide-dot.active{background:#fff;transform:scale(1.3)}
+.instituto-stat{position:absolute;bottom:-1.5rem;right:-1rem;background:#fff;border-radius:1rem;padding:1rem 1.5rem;box-shadow:0 8px 30px rgba(0,0,0,0.1);text-align:center;border-left:4px solid var(--dorado)}
+.stat-num{font-family:var(--font-display);font-size:2.2rem;color:var(--texto);font-weight:700}
+.stat-label{font-size:.75rem;color:var(--texto-suave);letter-spacing:.05em}
+
+/* CHEF REBECCA */
+#chef{background:var(--crema)}
+.chef-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+.chef-img-wrap{position:relative}
+.chef-img-inner{aspect-ratio:3/4;border-radius:1.5rem;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.15)}
+.chef-img-inner img{width:100%;height:100%;object-fit:cover;object-position:top}
+.chef-frame{position:absolute;top:-1rem;left:-1rem;right:1rem;bottom:1rem;border:2px solid var(--azul);border-radius:1.5rem;z-index:-1}
+.chef-timeline{display:flex;flex-direction:column;gap:0;margin-top:2rem;position:relative}
+.chef-timeline::before{content:'';position:absolute;left:17px;top:18px;bottom:18px;width:2px;background:linear-gradient(to bottom,var(--azul),var(--azul-deeper));border-radius:2px;z-index:0}
+.timeline-item{display:flex;gap:1rem;align-items:flex-start;padding-bottom:2rem;opacity:0;transform:translateY(28px);transition:opacity .55s ease,transform .55s ease}
+.timeline-item.visible{opacity:1;transform:translateY(0)}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{width:36px;height:36px;min-width:36px;border-radius:50%;background:var(--azul-light);border:2px solid var(--azul-deeper);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--azul-deeper);position:relative;z-index:1;transition:background .4s,color .4s}
+.timeline-item.visible .timeline-dot{background:var(--azul-deeper);color:#fff}
+.timeline-content{padding-top:.4rem}
+.timeline-content strong{display:block;font-weight:500;font-size:.95rem;color:var(--texto);margin-bottom:.2rem}
+.timeline-content span{font-size:.88rem;color:var(--texto-suave);line-height:1.5}
+
+/* AUTORIDAD */
+#autoridad{background:var(--azul-deeper);color:#fff}
+#autoridad .section-label{color:var(--dorado-light)}
+#autoridad .section-title{color:#fff}
+#autoridad .section-title em{color:var(--dorado-light)}
+#autoridad .divider{background:var(--dorado-light)}
+.autoridad-grid{display:grid;grid-template-columns:1fr;gap:3rem}
+.tv-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:1.2rem;padding:1.8rem;cursor:pointer;transition:background .3s,border-color .3s,transform .25s}
+.tv-card:hover{background:rgba(255,255,255,0.14);border-color:rgba(232,197,128,0.5);transform:translateY(-4px)}
+.tv-card h3{font-family:var(--font-display);font-size:1.3rem;color:#fff;margin-bottom:.5rem}
+.tv-card p{font-size:.9rem;color:rgba(255,255,255,0.75);line-height:1.6}
+.tv-card .card-extra{max-height:0;overflow:hidden;transition:max-height .5s ease,opacity .4s;opacity:0}
+.tv-card.open .card-extra{max-height:200px;opacity:1}
+.tv-card .card-toggle{display:flex;align-items:center;gap:.5rem;margin-top:1rem;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dorado-light);font-weight:500}
+.tv-card .card-toggle::after{content:'↓';transition:transform .3s}
+.tv-card.open .card-toggle::after{transform:rotate(180deg)}
+.cert-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:1.5rem}
+.cert-card{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:.8rem;padding:1rem;transition:background .3s,transform .25s;cursor:default}
+.cert-card:hover{background:rgba(232,197,128,0.15);border-color:rgba(232,197,128,0.4);transform:scale(1.02)}
+.cert-card-icon{font-size:1.4rem;margin-bottom:.4rem}
+.cert-card-title{font-size:.8rem;font-weight:500;color:#fff;line-height:1.4}
+.cert-card-sub{font-size:.72rem;color:rgba(255,255,255,0.55);margin-top:.2rem}
+.testimonios{margin-top:0}
+.testimonios h3{font-family:var(--font-display);font-size:1.6rem;color:#fff;margin-bottom:1.5rem;text-align:center}
+.testimonios-grid{display:grid;grid-template-columns:1fr;gap:1.2rem}
+.testimonio{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:1rem;padding:1.5rem;position:relative}
+.testimonio::before{content:'"';font-family:var(--font-display);font-size:4rem;color:var(--dorado-light);opacity:.4;position:absolute;top:-.5rem;left:1rem;line-height:1}
+.testimonio p{font-size:1.15rem;color:rgba(255,255,255,0.85);line-height:1.7;font-style:italic;margin-bottom:1rem;padding-top:.5rem}
+.testimonio strong{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--dorado-light)}
+
+/* CURSOS */
+#cursos{background:var(--blanco)}
+.cursos-intro{max-width:600px;margin-bottom:3rem}
+.cursos-intro p{color:var(--texto-suave);font-size:1rem;line-height:1.7}
+.cursos-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.curso-card{border:1px solid #e5eef5;border-radius:1rem;padding:1.5rem;transition:all .3s;cursor:pointer;display:flex;align-items:center;gap:1.2rem;background:var(--azul-xlight)}
+.curso-card:hover{border-color:var(--azul-deeper);background:var(--azul-light)}
+.curso-icon{width:48px;height:48px;min-width:48px;border-radius:.8rem;background:var(--azul-deeper);display:flex;align-items:center;justify-content:center;font-size:1.4rem}
+.curso-info strong{display:block;font-weight:500;font-size:.98rem;color:var(--texto);margin-bottom:.2rem}
+.curso-info span{font-size:.82rem;color:var(--texto-suave)}
+.curso-price{margin-left:auto;text-align:right;white-space:nowrap}
+.curso-price strong{display:block;font-family:var(--font-display);font-size:1.1rem;color:var(--azul-deeper)}
+.curso-price span{font-size:.75rem;color:var(--texto-suave)}
+.cursos-cta{margin-top:2.5rem;text-align:center}
+.btn-azul{background:var(--azul-deeper);color:#fff;padding:.9rem 2.5rem;border-radius:3rem;font-weight:500;text-decoration:none;font-size:.95rem;transition:all .3s;display:inline-block}
+.btn-azul:hover{background:#1d5f80;transform:translateY(-2px)}
+
+/* VIDEO INMERSIVO */
+#video-inmersivo{background:#0a1a25;padding:0;position:relative;overflow:hidden}
+.video-wrap{width:100%;aspect-ratio:16/9;position:relative}
+.video-wrap video{width:100%;height:100%;object-fit:cover;display:block}
+.video-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom,rgba(0,20,35,0.6),rgba(0,20,35,0.3),rgba(0,20,35,0.6));text-align:center;padding:2rem}
+.video-overlay h2{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,3rem);color:#fff;margin-bottom:1rem;line-height:1.2}
+.video-overlay p{color:rgba(255,255,255,0.8);font-size:1rem;max-width:500px}
+
+/* CONTACTO */
+#contacto{background:var(--crema)}
+.contacto-grid{display:grid;grid-template-columns:1fr;gap:3rem}
+.contacto-info p{color:var(--texto-suave);font-size:1rem;line-height:1.7;margin-bottom:2rem}
+.contacto-datos{display:flex;flex-direction:column;gap:1.2rem}
+.dato{display:flex;align-items:flex-start;gap:1rem}
+.dato-icon{width:40px;height:40px;min-width:40px;border-radius:.7rem;background:var(--azul-light);border:1px solid var(--azul);display:flex;align-items:center;justify-content:center;font-size:1rem}
+.dato-text strong{display:block;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--azul-deeper);margin-bottom:.2rem}
+.dato-text span,.dato-text a{font-size:.92rem;color:var(--texto-suave);text-decoration:none;line-height:1.5;display:block}
+.dato-text a:hover{color:var(--azul-deeper)}
+.redes{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap}
+.red-btn{display:flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:2rem;border:1px solid var(--azul);color:var(--azul-deeper);font-size:.82rem;font-weight:500;text-decoration:none;transition:all .3s;background:var(--azul-xlight)}
+.red-btn:hover{background:var(--azul-deeper);color:#fff;border-color:var(--azul-deeper)}
+.contacto-form{background:#fff;border-radius:1.5rem;padding:2rem;box-shadow:0 8px 40px rgba(0,0,0,0.07);border:1px solid #e5eef5}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-size:.8rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--azul-deeper);margin-bottom:.5rem}
+.form-group input,.form-group textarea{width:100%;padding:.8rem 1rem;border:1.5px solid #dae8f0;border-radius:.7rem;font-family:var(--font-body);font-size:.95rem;color:var(--texto);background:#fafcfe;transition:border .3s;outline:none}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--azul-deeper)}
+.form-group textarea{resize:vertical;min-height:110px}
+.btn-submit{width:100%;background:var(--azul-deeper);color:#fff;border:none;padding:1rem;border-radius:3rem;font-family:var(--font-body);font-size:1rem;font-weight:500;cursor:pointer;transition:all .3s;letter-spacing:.04em}
+.btn-submit:hover{background:#1d5f80}
+
+@keyframes blink-soft{0%,100%{opacity:1}50%{opacity:.45}}
+.blink-title{animation:blink-soft 2.8s ease-in-out infinite}
+.mapa-wrap{margin-top:2rem;border-radius:1rem;overflow:hidden;border:1px solid var(--azul)}
+.mapa-wrap iframe{width:100%;height:280px;border:none;display:block}
+
+/* FOOTER */
+footer{background:#0a1a25;color:rgba(255,255,255,0.6);text-align:center;padding:2rem 1.5rem;font-size:.82rem}
+footer span{color:var(--dorado-light)}
+
+/* WHATSAPP FLOAT */
+.wa-float{position:fixed;right:1.2rem;bottom:1.2rem;z-index:200;width:58px;height:58px;border-radius:50%;background:#25D366;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s,box-shadow .25s}
+.wa-float:hover{transform:scale(1.08);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+.wa-float svg{width:32px;height:32px}
+.wa-float::after{content:'';position:absolute;inset:0;border-radius:50%;background:#25D366;z-index:-1;animation:wa-pulse 2.2s ease-out infinite}
+@keyframes wa-pulse{0%{transform:scale(1);opacity:.55}70%{transform:scale(1.55);opacity:0}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.wa-float::after{animation:none}}
+
+/* MOBILE BASE */
+@media(max-width:599px){
+  .video-wrap{aspect-ratio:9/16}
+}
+
+/* TABLET */
+@media(min-width:600px){
+  .cursos-grid{grid-template-columns:1fr 1fr}
+  .testimonios-grid{grid-template-columns:1fr 1fr}
+  .autoridad-grid{grid-template-columns:1fr 1fr}
+}
+
+/* DESKTOP */
+@media(min-width:1024px){
+  .instituto-grid{grid-template-columns:1fr 1fr}
+  .chef-grid{grid-template-columns:1fr 1.6fr}
+  .contacto-grid{grid-template-columns:1fr 1.2fr}
+  .cursos-grid{grid-template-columns:1fr 1fr 1fr}
+  .testimonios-grid{grid-template-columns:1fr 1fr 1fr}
+  .nav-hamburger{display:none}
+  .nav-links{display:flex !important}
+  .instituto-stat{bottom:-1.5rem;right:-1rem}
+}
+
+@media(max-width:1023px){
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,255,255,0.97);flex-direction:column;padding:1rem 1.5rem 1.5rem;gap:.5rem;box-shadow:0 8px 30px rgba(0,0,0,0.1)}
+  .nav-links.open{display:flex}
+  .nav-links a{color:var(--texto-suave) !important;padding:.5rem 0;border-bottom:1px solid #eef}
+  .nav-hamburger{display:flex}
+  .instituto-stat{position:static;margin-top:1rem;display:inline-block}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ic-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></symbol>
+  <symbol id="ic-tv" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 21h8M9 6l3-3 3 3"/></symbol>
+  <symbol id="ic-trophy" viewBox="0 0 24 24"><path d="M7 4h10v4a5 5 0 01-10 0V4z"/><path d="M7 5H4v1a3 3 0 003 3M17 5h3v1a3 3 0 01-3 3"/><path d="M12 13v4M8.5 20h7M10 20a2 2 0 014 0"/></symbol>
+  <symbol id="ic-hat" viewBox="0 0 24 24"><path d="M6 14a3.5 3.5 0 01-.8-6.9A4 4 0 0112 4.2 4 4 0 0118.8 7 3.5 3.5 0 0118 14"/><path d="M6.5 14v3.5a1 1 0 001 1h9a1 1 0 001-1V14"/><path d="M10 14v4M14 14v4"/></symbol>
+  <symbol id="ic-medal" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5"/><path d="M9 13.2l-1.8 6.8 4.8-2.7 4.8 2.7-1.8-6.8"/></symbol>
+  <symbol id="ic-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 3 2.6 15 0 18M12 3c-2.6 3-2.6 15 0 18"/></symbol>
+  <symbol id="ic-bread" viewBox="0 0 24 24"><path d="M6 8a3.5 3.5 0 013.5-3.5h5A3.5 3.5 0 0118 8c0 1.2-1 2-2 2.2V18a1 1 0 01-1 1H9a1 1 0 01-1-1v-7.8C7 10 6 9.2 6 8z"/><path d="M11 11v6"/></symbol>
+  <symbol id="ic-cake" viewBox="0 0 24 24"><path d="M4 20h16M5 20v-6a2 2 0 012-2h10a2 2 0 012 2v6"/><path d="M5 15.5c1.4 0 1.4 1.4 2.8 1.4S9.2 15.5 10.6 15.5 12 16.9 13.4 16.9 14.8 15.5 16.2 15.5 17.6 16.9 19 16.9"/><path d="M12 12V8M12 4.5l1 2h-2z"/></symbol>
+  <symbol id="ic-utensils" viewBox="0 0 24 24"><path d="M6 3v8M4 3v4a2 2 0 004 0V3M6 11v10"/><path d="M16.5 3c-1.5 0-2.5 2-2.5 5s1 4 2.5 4V21"/></symbol>
+  <symbol id="ic-dome" viewBox="0 0 24 24"><path d="M3.5 17h17M5.5 17a6.5 6.5 0 0113 0M12 7V5M10.5 5h3"/></symbol>
+  <symbol id="ic-dessert" viewBox="0 0 24 24"><path d="M6 11h12l-1.4 7.8a1 1 0 01-1 .9H8.4a1 1 0 01-1-.9z"/><path d="M7.5 11a4.5 4.5 0 019 0"/><path d="M12 6.5V4"/></symbol>
+  <symbol id="ic-brush" viewBox="0 0 24 24"><path d="M14 5l5 5-7.5 7.5-3-3z"/><path d="M9.5 14.5l-3.5 1-1 3.5 3.5-1 2.5-2.5"/></symbol>
+  <symbol id="ic-choc" viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="16" rx="1.5"/><path d="M5 9.3h14M5 14.6h14M12 4v16"/></symbol>
+  <symbol id="ic-coffee" viewBox="0 0 24 24"><path d="M4 9h13v4.5a4.5 4.5 0 01-4.5 4.5H8.5A4.5 4.5 0 014 13.5z"/><path d="M17 10h2a2 2 0 010 4h-2"/><path d="M7.5 3.5c0 1-1 1.2-1 2.2M11 3.5c0 1-1 1.2-1 2.2"/></symbol>
+  <symbol id="ic-cocktail" viewBox="0 0 24 24"><path d="M4 5h16l-8 8z"/><path d="M12 13v6M8.5 19h7M14 8.5l4.5-3.5"/></symbol>
+  <symbol id="ic-star" viewBox="0 0 24 24"><path d="M12 4l2.2 4.6 5 .7-3.6 3.5.9 5-4.5-2.4L7.5 17.8l.9-5L4.8 9.3l5-.7z"/></symbol>
+  <symbol id="ic-pin" viewBox="0 0 24 24"><path d="M12 21s7-6.3 7-12a7 7 0 00-14 0c0 5.7 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></symbol>
+  <symbol id="ic-phone" viewBox="0 0 24 24"><path d="M5 4h3l1.8 4.5-2 1.2a11 11 0 005 5l1.2-2L19 15.5V18a2 2 0 01-2 2A15 15 0 014 6a2 2 0 011-2z"/></symbol>
+  <symbol id="ic-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-4 4z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+  <symbol id="ic-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></symbol>
+  <symbol id="ic-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17" cy="7" r="1.1"/></symbol>
+  <symbol id="ic-facebook" viewBox="0 0 24 24"><path d="M15 5h-1.5A3 3 0 0010.5 8v2.5H8.5v3h2V21h3v-7.5h2.3l.6-3h-2.9V8.3a.8.8 0 01.8-.8H15z"/></symbol>
+  <symbol id="ic-youtube" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M10.5 9.3l4.5 2.7-4.5 2.7z"/></symbol>
+  <symbol id="ic-music" viewBox="0 0 24 24"><path d="M10 18V6l8-2v10"/><circle cx="7.5" cy="18" r="2.5"/><circle cx="15.5" cy="16" r="2.5"/></symbol>
+</svg>
+
+<nav id="mainNav">
+  <div class="nav-logo">
+    <a href="#inicio"><img src="https://igrebeccascuisine.com/wp-content/uploads/2024/03/Chef-Rebecca-logo.png" alt="Instituto Gastronómico Rebecca's Cuisine"></a>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#instituto">El Instituto</a></li>
+    <li><a href="#chef">Chef Rebecca</a></li>
+    <li><a href="#autoridad">Certificaciones</a></li>
+    <li><a href="#cursos">Cursos</a></li>
+    <li><a href="#contacto" class="nav-cta">Matricúlate</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <video autoplay muted loop playsinline preload="auto">
+    <source src="Header.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Único en Costa Rica con aval INA · MEP · WorldChefs</div>
+    <h1>Despierta al chef<br>que llevas <em>dentro</em></h1>
+    <p>Formación gastronómica de excelencia, con más de 30 años de trayectoria y presencia en televisión nacional.</p>
+    <div class="hero-btns">
+      <a href="#cursos" class="btn-primary">Ver cursos</a>
+      <a href="#instituto" class="btn-outline">Conocer el instituto</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="hero-scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- EL INSTITUTO -->
+<section id="instituto">
+  <div class="container">
+    <div class="instituto-grid">
+      <div class="instituto-text">
+        <p class="section-label">Quiénes somos</p>
+        <h2 class="section-title">El único instituto con <em>triple certificación</em></h2>
+        <div class="divider"></div>
+        <p>El Instituto Gastronómico Rebecca's Cuisine (IGRC) es la única escuela de gastronomía en Costa Rica con certificación simultánea del INA, el MEP y la World Association of Cook's Societies.</p>
+        <p>Formamos profesionales de cocina internacional, pastelería, panadería, chocolatería, barismo y más — con metodología práctica y estándares de clase mundial.</p>
+        <p>Ubicados en San Francisco de Dos Ríos, San José, somos el espacio donde la pasión se convierte en carrera.</p>
+        <div class="instituto-badges">
+          <span class="badge"><span class="badge-icon"><svg class="ic"><use href="#ic-check"/></svg></span>Certificado INA</span>
+          <span class="badge"><span class="badge-icon"><svg class="ic"><use href="#ic-check"/></svg></span>Aval MEP</span>
+          <span class="badge"><span class="badge-icon"><svg class="ic"><use href="#ic-check"/></svg></span>WorldChefs</span>
+          <span class="badge"><span class="badge-icon"><svg class="ic"><use href="#ic-check"/></svg></span>British Culinary Federation</span>
+        </div>
+      </div>
+      <div class="instituto-visual">
+        <div class="instituto-img-wrap" id="foodSlider">
+          <img src="Gastronomia.png" alt="Gastronomía" class="active">
+          <img src="Gourmet.png" alt="Cocina Gourmet">
+          <img src="Pasteleria.png" alt="Pastelería & Dulces">
+          <img src="Barismo.png" alt="Barismo & Cafetería">
+          <span class="slide-label" id="slideLabel">Gastronomía</span>
+          <div class="slide-dots" id="slideDots"></div>
+        </div>
+        <div class="instituto-stat">
+          <div class="stat-num">30+</div>
+          <div class="stat-label">años de experiencia</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF REBECCA -->
+<section id="chef">
+  <div class="container">
+    <div class="chef-grid">
+      <div class="chef-img-wrap">
+        <div class="chef-img-inner">
+          <img src="Rebeca.jpg" alt="Chef Rebecca Bolaños" loading="lazy" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Chefs_at_Canlis_Restaurant_in_Seattle.jpg/800px-Chefs_at_Canlis_Restaurant_in_Seattle.jpg'">
+        </div>
+        <div class="chef-frame"></div>
+      </div>
+      <div class="chef-text">
+        <p class="section-label">La fundadora</p>
+        <h2 class="section-title">Chef <em>Rebecca</em></h2>
+        <div class="divider"></div>
+        <p style="color:var(--texto-suave);font-size:1rem;line-height:1.8;margin-bottom:1.5rem">Rebecca Bolaños Whitlock nació en Southampton, Inglaterra, y creció aprendiendo el arte de la cocina junto a su madre y su abuela. En Costa Rica encontró su hogar y en la gastronomía, su vocación.</p>
+        <div class="chef-timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot">93</div>
+            <div class="timeline-content">
+              <strong>Primer catering</strong>
+              <span>Abre su primer servicio de catering en San José, Costa Rica.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">05</div>
+            <div class="timeline-content">
+              <strong>Debut en televisión</strong>
+              <span>Participa en "La Cocina de Roy" por canal 13 y en "Mujeres del 2000".</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">08</div>
+            <div class="timeline-content">
+              <strong>Chef Pastelera Profesional</strong>
+              <span>Certificada por la World Association of Cook's Societies y el Foro Panamericano.</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot">16</div>
+            <div class="timeline-content">
+              <strong>Cocina de Hoy · Canal 33</strong>
+              <span>Lanza su propio programa en Xpertv — la única chef que se consolidó en TV tras la pandemia.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTORIDAD -->
+<section id="autoridad">
+  <div class="container">
+    <p class="section-label">Trayectoria & reconocimientos</p>
+    <h2 class="section-title">Respaldada por <em>décadas</em> de excelencia</h2>
+    <div class="divider"></div>
+    <div class="autoridad-grid">
+      <div>
+        <div class="tv-card" onclick="this.classList.toggle('open')">
+          <h3><svg class="ic"><use href="#ic-tv"/></svg>Presencia en televisión nacional</h3>
+          <p style="margin-top:.8rem">La única chef en Costa Rica que, tras la pandemia, conservó espacio propio en TV. Actualmente en <strong style="color:var(--dorado-light)">Cocina de Hoy</strong> por Xpertv, canal 33.</p>
+          <div class="card-extra">
+            <p style="margin-top:.8rem;font-size:.85rem;color:rgba(255,255,255,0.65)">"La Cocina de Roy" canal 13 · "Mujeres del 2000" · "Cocinando con Tía Florita" · "Giros" canal 6 · más de 20 años de presencia continua.</p>
+          </div>
+          <div class="card-toggle">Ver historial televisivo</div>
+        </div>
+        <div style="margin-top:1.5rem">
+          <p style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--dorado-light);margin-bottom:1rem">Certificaciones internacionales</p>
+          <div class="cert-grid">
+            <div class="cert-card"><div class="cert-card-icon"><svg class="ic"><use href="#ic-trophy"/></svg></div><div class="cert-card-title">FOOD MANAGER · MAÎTRE RÔTISSEUR</div><div class="cert-card-sub">PPC-ANCHCR</div></div>
+            <div class="cert-card"><div class="cert-card-icon"><svg class="ic"><use href="#ic-hat"/></svg></div><div class="cert-card-title">Executive Chef · Chef Pâtissier</div><div class="cert-card-sub">Chef Boulanger · Chef de Cuisine</div></div>
+            <div class="cert-card"><div class="cert-card-icon"><svg class="ic"><use href="#ic-medal"/></svg></div><div class="cert-card-title">British Culinary Federation</div><div class="cert-card-sub">Miembro activo</div></div>
+            <div class="cert-card"><div class="cert-card-icon"><svg class="ic"><use href="#ic-globe"/></svg></div><div class="cert-card-title">World Association of Cook's Societies</div><div class="cert-card-sub">Foro Panamericano</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="testimonios">
+          <h3>Lo que dicen nuestras alumnas</h3>
+          <div class="testimonios-grid">
+            <div class="testimonio">
+              <p>Las recetas son prácticas y se ven deliciosas. Apenas puedo esperar para prepararlas en casa.</p>
+              <strong>Elieth Rojas Navarro</strong>
+            </div>
+            <div class="testimonio">
+              <p>Platos económicos, muy bien presentados y sobre todo deliciosos y fáciles de aprender.</p>
+              <strong>Jeannette Ulate Venegas</strong>
+            </div>
+            <div class="testimonio">
+              <p>Excelentes recetas, fáciles de hacer, muy económicas y sobre todo deliciosas.</p>
+              <strong>Rosa María Molina</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS -->
+<section id="cursos">
+  <div class="container">
+    <div class="cursos-intro">
+      <p class="section-label">Formación profesional</p>
+      <h2 class="section-title">Elige tu <em>especialidad</em></h2>
+      <div class="divider"></div>
+      <p>Cursos técnicos con certificación avalada. Aprende con metodología práctica, horarios flexibles y el respaldo de una chef con presencia nacional.</p>
+    </div>
+    <div class="cursos-grid">
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-bread"/></svg></div><div class="curso-info"><strong>Panadería Profesional</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡117,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-cake"/></svg></div><div class="curso-info"><strong>Pastelería Profesional</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡137,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-utensils"/></svg></div><div class="curso-info"><strong>Gastronomía y Artes Culinarias</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡145,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-dome"/></svg></div><div class="curso-info"><strong>Catering Service</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡145,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-dessert"/></svg></div><div class="curso-info"><strong>Repostería Profesional</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡117,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-brush"/></svg></div><div class="curso-info"><strong>Decoración de Queques</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡65,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-choc"/></svg></div><div class="curso-info"><strong>Chocolatería (Chocolatier)</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡117,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-coffee"/></svg></div><div class="curso-info"><strong>Cafetería y Barismo</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡125,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-cocktail"/></svg></div><div class="curso-info"><strong>Bartender Profesional</strong><span>Técnico certificado</span></div><div class="curso-price"><strong>₡125,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-star"/></svg></div><div class="curso-info"><strong>Junior Chef — Cocina</strong><span>Programa para niños</span></div><div class="curso-price"><strong>₡120,000</strong><span>IVA incl.</span></div></div>
+      <div class="curso-card"><div class="curso-icon"><svg class="ic"><use href="#ic-star"/></svg></div><div class="curso-info"><strong>Junior Chef — Pastelería</strong><span>Programa para niños</span></div><div class="curso-price"><strong>₡120,000</strong><span>IVA incl.</span></div></div>
+    </div>
+    <div class="cursos-cta">
+      <a href="#contacto" class="btn-azul">Quiero matricularme</a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO INMERSIVO -->
+<div id="video-inmersivo">
+  <div class="video-wrap">
+    <video autoplay muted loop playsinline preload="metadata">
+      <source src="MIdle.mp4" type="video/mp4">
+    </video>
+    <div class="video-overlay">
+      <h2>Vamos a cocinar<br>juntos</h2>
+      <p>Cada plato cuenta una historia. La tuya empieza aquí.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <p class="section-label">Estamos aquí</p>
+        <h2 class="section-title">Hablemos de tu <em>futuro</em></h2>
+        <div class="divider"></div>
+        <p>Estamos listos para orientarte sobre los cursos, horarios y proceso de matrícula. No dejes ir más tiempo sin empezar.</p>
+        <div class="contacto-datos">
+          <div class="dato">
+            <div class="dato-icon"><svg class="ic"><use href="#ic-pin"/></svg></div>
+            <div class="dato-text">
+              <strong>Dirección</strong>
+              <span>San José, San Francisco de Dos Ríos<br>Del BCR 100 metros al este. Edificio La Margarita</span>
+            </div>
+          </div>
+          <div class="dato">
+            <div class="dato-icon"><svg class="ic"><use href="#ic-phone"/></svg></div>
+            <div class="dato-text">
+              <strong>Teléfonos</strong>
+              <a href="tel:+50622273191">(506) 2227-3191</a>
+              <a href="tel:+50622273212">(506) 2227-3212</a>
+            </div>
+          </div>
+          <div class="dato">
+            <div class="dato-icon"><svg class="ic"><use href="#ic-chat"/></svg></div>
+            <div class="dato-text">
+              <strong>WhatsApp</strong>
+              <a href="https://wa.me/50660483356">(506) 6048-3356</a>
+            </div>
+          </div>
+          <div class="dato">
+            <div class="dato-icon"><svg class="ic"><use href="#ic-mail"/></svg></div>
+            <div class="dato-text">
+              <strong>Email</strong>
+              <a href="mailto:info@chefrebecca.tv">info@chefrebecca.tv</a>
+            </div>
+          </div>
+        </div>
+        <div class="redes">
+          <a href="https://www.instagram.com/institutogastronomicorc/" target="_blank" class="red-btn"><svg class="ic"><use href="#ic-instagram"/></svg>Instagram Instituto</a>
+          <a href="https://www.facebook.com/InstitutoGastronomicoRebeccaCuisine/" target="_blank" class="red-btn"><svg class="ic"><use href="#ic-facebook"/></svg>Facebook</a>
+          <a href="https://www.youtube.com/@ChefRebecca-igrc/videos" target="_blank" class="red-btn"><svg class="ic"><use href="#ic-youtube"/></svg>YouTube</a>
+          <a href="https://www.tiktok.com/@chef.rebeccatv" target="_blank" class="red-btn"><svg class="ic"><use href="#ic-music"/></svg>TikTok</a>
+        </div>
+        <div class="mapa-wrap">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15721.060172544712!2d-84.0608345!3d9.9118698!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8fa0e30a3bcd6d99%3A0xc8d73ed6ab63d0b0!2sInstituto%20Gastronomico%20Rebecca's%20Cuisine!5e0!3m2!1ses!2sco!4v1710986442649!5m2!1ses!2sco" allowfullscreen loading="lazy"></iframe>
+        </div>
+      </div>
+      <div class="contacto-form">
+        <h3 style="font-family:var(--font-display);font-size:1.4rem;margin-bottom:1.5rem;color:var(--texto)">Envíanos un mensaje</h3>
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" placeholder="tu@correo.com">
+        </div>
+        <div class="form-group">
+          <label>Curso de interés</label>
+          <input type="text" placeholder="¿Qué curso te interesa?">
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea placeholder="Cuéntanos en qué podemos ayudarte..."></textarea>
+        </div>
+        <button class="btn-submit">Enviar mensaje</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Instituto Gastronómico <span>Rebecca's Cuisine</span> · Todos los derechos reservados</p>
+  <p style="margin-top:.5rem">San Francisco de Dos Ríos, San José, Costa Rica</p>
+</footer>
+
+<a href="https://wa.me/50660483356" target="_blank" rel="noopener" class="wa-float" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 .5C7.5.5.6 7.4.6 15.9c0 2.8.7 5.5 2.1 7.9L.5 31.5l7.9-2.1c2.3 1.3 4.9 1.9 7.6 1.9 8.5 0 15.4-6.9 15.4-15.4S24.5.5 16 .5zm0 28.1c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5c-1.3-2.1-2-4.5-2-7 0-7.1 5.8-12.9 12.9-12.9S28.9 8.8 28.9 15.9 23.1 28.6 16 28.6zm7.1-9.7c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2-.3.4-1 1.3-1.2 1.5-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.3-2.2-2.7-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.6.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.2 2.8 4.3 6.8 6 .9.4 1.7.7 2.3.9.9.3 1.8.2 2.5.1.8-.1 2.3-.9 2.6-1.9.3-.9.3-1.7.2-1.9-.1-.1-.3-.2-.7-.4z"/></svg>
+</a>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const nav=document.getElementById('mainNav');
+  nav.classList.toggle('scrolled',window.scrollY>60);
+});
+function toggleNav(){
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// Timeline scroll animation
+const timelineItems = document.querySelectorAll('.timeline-item');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const items = entry.target.parentElement.querySelectorAll('.timeline-item');
+      items.forEach((item, i) => {
+        setTimeout(() => item.classList.add('visible'), i * 220);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, {threshold: 0.15});
+if(timelineItems.length) observer.observe(timelineItems[0]);
+
+// Food image slideshow
+const slider = document.getElementById('foodSlider');
+if(slider){
+  const imgs = slider.querySelectorAll('img');
+  const label = document.getElementById('slideLabel');
+  const dotsWrap = document.getElementById('slideDots');
+  const labels = ['Gastronomía','Cocina Gourmet','Pastelería & Dulces','Barismo & Cafetería'];
+  let current = 0;
+
+  // Build dots
+  imgs.forEach((_,i)=>{
+    const d = document.createElement('div');
+    d.className = 'slide-dot' + (i===0?' active':'');
+    d.onclick = ()=> goTo(i);
+    dotsWrap.appendChild(d);
+  });
+
+  function goTo(n){
+    imgs[current].classList.remove('active');
+    dotsWrap.children[current].classList.remove('active');
+    current = (n + imgs.length) % imgs.length;
+    imgs[current].classList.add('active');
+    dotsWrap.children[current].classList.add('active');
+    if(label) label.textContent = labels[current];
+  }
+
+  setInterval(()=> goTo(current + 1), 3200);
+}
+</script>
+</body>
+</html>
